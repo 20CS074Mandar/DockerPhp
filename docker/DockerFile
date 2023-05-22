@@ -1,0 +1,16 @@
+FROM php:7.4-apache
+
+# Install necessary PHP extensions
+RUN docker-php-ext-install mysqli
+
+# Enable necessary Apache modules
+RUN a2enmod rewrite
+
+# Copy API files into the container
+COPY ./api/ /var/www/html/api/
+
+# Copy .htaccess file into the container
+COPY ./api/.htaccess /var/www/html/api/
+
+# Set the working directory
+WORKDIR /var/www/html/api/
